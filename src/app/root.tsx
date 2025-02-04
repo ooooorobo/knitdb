@@ -1,4 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { LinksFunction } from '@remix-run/node';
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: 'https://matcha.mizu.sh/matcha.css' }];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
