@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from '@remix-run/node';
+import { LoaderFunction } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import { useLoaderData } from 'react-router';
 import camelize, { Camelize } from 'camelize-ts';
@@ -11,11 +11,6 @@ export const loader = (async ({ request, params }) => {
   const id = Number(params.id);
   if (!id || Number.isNaN(id)) {
     throw new Response('', { status: 404, headers });
-  }
-
-  const session = await client.auth.getSession();
-  if (!session) {
-    throw redirect('/login', { headers });
   }
 
   const { data } = await client

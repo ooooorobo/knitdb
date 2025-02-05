@@ -16,9 +16,9 @@ export const links: LinksFunction = () => [
 export const loader: LoaderFunction = async ({ request }) => {
   const { client, headers } = createSupabaseClient(request);
 
-  const session = client.auth.getSession();
+  const { data } = await client.auth.getSession();
 
-  if (!session) {
+  if (new URL(request.url).pathname !== '/login' && !data.session) {
     throw redirect('/login', { headers });
   }
 

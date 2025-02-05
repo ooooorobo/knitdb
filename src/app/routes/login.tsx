@@ -24,7 +24,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
   }
 
-  return new redirect('/', {
+  return redirect('/', {
     headers,
   });
 };
