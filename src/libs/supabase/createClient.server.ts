@@ -3,8 +3,15 @@ import {
   parseCookieHeader,
   serializeCookieHeader,
 } from '@supabase/ssr';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { Database } from 'src/types/dto';
 
-export const createSupabaseClient = (request: Request) => {
+export const createSupabaseClient = (
+  request: Request,
+): {
+  client: SupabaseClient<Database>;
+  headers: Headers;
+} => {
   const headers = new Headers();
 
   const client = createServerClient(
