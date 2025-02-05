@@ -1,0 +1,17 @@
+import { Camelize } from 'camelize-ts';
+import { Tables } from 'src/types/dto';
+import { NeedleTypeToName } from 'src/constants/enum/needleType';
+
+export const NeedleCard = ({
+  needle,
+}: {
+  needle: Camelize<Tables<'needles'>>;
+}) => {
+  return (
+    <article>
+      <h3>{needle.name}</h3>
+      <span>{NeedleTypeToName[needle.type].kr}</span>
+      <span>{needle.width}mm</span>
+    </article>
+  );
+};
