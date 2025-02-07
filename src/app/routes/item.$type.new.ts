@@ -1,6 +1,7 @@
 import { ActionFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import { insertNeedleData } from 'src/domains/needle/NeedleRepository.server';
+import { insertYarnData } from 'src/domains/yarn/YarnRepository.server';
 
 export const action: ActionFunction = async ({ request, params }) => {
   const type = params.type as 'yarn' | 'needle';
@@ -19,8 +20,15 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
     case 'yarn': {
-      console.log(await request.formData());
-      return {};
+      const data = await insertYarnData(client, await request.formData());
+
+      if (!data) {
+        throw new Response('실패', { headers });
+      }
+
+      return redirect(`/yarn/${data.id}`, {
+        headers,
+      });
     }
   }
 };

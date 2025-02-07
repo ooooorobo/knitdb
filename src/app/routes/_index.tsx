@@ -1,6 +1,6 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
-import { useLoaderData } from 'react-router';
+import { json, useLoaderData } from 'react-router';
 import { NeedleCard } from 'src/components/list/needle/NeedleCard';
 import { Camelize } from 'camelize-ts';
 import { Tables } from 'src/types/dto';
@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (!data) throw new Response('', { status: 404 });
 
-  return Response.json(data[0].needles, { headers });
+  return json(data[0].needles, { headers });
 };
 
 export default function Index() {
