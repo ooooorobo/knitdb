@@ -9,6 +9,15 @@ import {
 import { LinksFunction, LoaderFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import './global.css';
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from '~/components/ui/menubar';
 
 export const links: LinksFunction = () => [
   {
@@ -40,7 +49,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className={'min-h-svh bg-background text-foreground'}>
+        <Menubar>
+          <MenubarMenu>
+            <MenubarTrigger>File</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>
+                New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+              </MenubarItem>
+              <MenubarItem>New Window</MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem>Share</MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem>Print</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
         <header>
           <Link to={'/'}>뜨개디비</Link>
           <Link to={'/item/new'}>추가</Link>
