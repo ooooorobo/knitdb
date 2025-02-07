@@ -19,8 +19,6 @@ export const loader = (async ({ request, params }) => {
     .eq('id', id)
     .single();
 
-  console.log(data);
-
   if (!data) {
     throw new Response('', { status: 404, headers });
   }
