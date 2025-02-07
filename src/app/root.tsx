@@ -11,7 +11,6 @@ import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import './global.css';
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: 'https://matcha.mizu.sh/matcha.css' },
   {
     rel: 'stylesheet',
     crossOrigin: 'anonymous',
