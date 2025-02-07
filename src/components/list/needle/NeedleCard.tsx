@@ -1,6 +1,6 @@
 import { Camelize } from 'camelize-ts';
 import { Tables } from 'src/types/dto';
-import { NeedleTypeToName } from 'src/constants/enum/needleType';
+import { NeedleType, NeedleTypeToName } from 'src/constants/enum/needleType';
 
 export const NeedleCard = ({
   needle,
@@ -10,7 +10,7 @@ export const NeedleCard = ({
   return (
     <article>
       <h3>{needle.name}</h3>
-      <span>{NeedleTypeToName[needle.type].kr}</span>
+      <span>{NeedleTypeToName[needle.type as NeedleType].kr}</span>
       <span>{needle.width}mm</span>
     </article>
   );

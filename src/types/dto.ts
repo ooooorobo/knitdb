@@ -34,7 +34,15 @@ export type Database = {
           url?: string
           width?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "images_creator_id_fkey1"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       needle_images: {
         Row: {
@@ -60,6 +68,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "needle_images_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "needle_images_image_id_fkey"
             columns: ["image_id"]
             isOneToOne: false
@@ -78,7 +93,7 @@ export type Database = {
       needles: {
         Row: {
           created_at: string
-          creator_id: string | null
+          creator_id: string
           id: number
           memo: string | null
           name: string
@@ -91,7 +106,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          creator_id?: string | null
+          creator_id: string
           id?: number
           memo?: string | null
           name: string
@@ -104,7 +119,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          creator_id?: string | null
+          creator_id?: string
           id?: number
           memo?: string | null
           name?: string
@@ -115,7 +130,15 @@ export type Database = {
           url?: string | null
           width?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "needles_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       users: {
         Row: {
@@ -132,29 +155,81 @@ export type Database = {
         }
         Relationships: []
       }
-      yarn_images: {
+      yarn_colors: {
         Row: {
+          color: string
           created_at: string
           creator_id: string | null
           id: number
-          image_id: number | null
+          name: string | null
+          updated_at: string
           yarn_id: number | null
         }
         Insert: {
+          color: string
           created_at?: string
           creator_id?: string | null
           id?: number
-          image_id?: number | null
+          name?: string | null
+          updated_at?: string
           yarn_id?: number | null
         }
         Update: {
+          color?: string
           created_at?: string
           creator_id?: string | null
           id?: number
-          image_id?: number | null
+          name?: string | null
+          updated_at?: string
           yarn_id?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "yarn_colors_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "yarn_colors_yarn_id_fkey"
+            columns: ["yarn_id"]
+            isOneToOne: false
+            referencedRelation: "yarns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      yarn_images: {
+        Row: {
+          created_at: string
+          creator_id: string
+          id: number
+          image_id: number
+          yarn_id: number
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          id?: number
+          image_id: number
+          yarn_id: number
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          id?: number
+          image_id?: number
+          yarn_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "yarn_images_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "yarn_images_image_id_fkey"
             columns: ["image_id"]
@@ -220,7 +295,15 @@ export type Database = {
           url?: string | null
           weight?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "yarns_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

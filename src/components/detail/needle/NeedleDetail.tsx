@@ -1,7 +1,7 @@
 import { Tables } from 'src/types/dto';
 import { Camelize } from 'camelize-ts';
 import styles from './NeedleDetail.module.css';
-import { NeedleTypeToName } from 'src/constants/enum/needleType';
+import { NeedleType, NeedleTypeToName } from 'src/constants/enum/needleType';
 
 export const NeedleDetail = ({
   needle,
@@ -15,7 +15,7 @@ export const NeedleDetail = ({
         <tbody>
           <tr>
             <th>종류</th>
-            <td>{NeedleTypeToName[needle.type].kr}</td>
+            <td>{NeedleTypeToName[needle.type as NeedleType].kr}</td>
           </tr>
           <tr>
             <th>두께</th>
@@ -25,12 +25,14 @@ export const NeedleDetail = ({
             <th>가격</th>
             <td>{needle.priceAmount}원</td>
           </tr>
-          <tr>
-            <th>구매처 링크</th>
-            <td>
-              <a href={needle.url}>{needle.url}</a>
-            </td>
-          </tr>
+          {needle.url && (
+            <tr>
+              <th>구매처 링크</th>
+              <td>
+                <a href={needle.url}>{needle.url}</a>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <div className={styles.Memo}>{needle.memo}</div>

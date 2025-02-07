@@ -23,7 +23,7 @@ export const loader = (async ({ request, params }) => {
     throw new Response('', { status: 404, headers });
   }
 
-  return Response.json(camelize(data), { headers });
+  return new Response(JSON.stringify(camelize(data)), { headers });
 }) satisfies LoaderFunction;
 
 export function ErrorBoundary() {
@@ -31,7 +31,7 @@ export function ErrorBoundary() {
 }
 
 export default function NeedleDetailPage() {
-  const data = useLoaderData<typeof loader>() as Camelize<Tables<'needles'>>;
+  const data = useLoaderData() as Camelize<Tables<'needles'>>;
 
   return <NeedleDetail needle={data} />;
 }

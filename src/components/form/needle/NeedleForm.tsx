@@ -34,7 +34,7 @@ export const NeedleForm = () => {
       </label>
       <label>
         메모
-        <textarea name="memo" id="memo" cols="30" rows="10" maxLength={5000} />
+        <textarea name="memo" id="memo" cols={30} rows={10} maxLength={5000} />
       </label>
       <button>저장하기</button>
     </form>
