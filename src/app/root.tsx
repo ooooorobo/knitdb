@@ -8,7 +8,7 @@ import {
 } from '@remix-run/react';
 import { LinksFunction, LoaderFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
-import './global.css';
+import styles from './global.css?url';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -18,6 +18,7 @@ import {
 } from '~/components/ui/navigation-menu';
 
 export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: styles },
   {
     rel: 'stylesheet',
     crossOrigin: 'anonymous',

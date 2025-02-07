@@ -1,5 +1,13 @@
 import { Camelize } from 'camelize-ts';
 import { Tables } from 'src/types/dto';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '~/components/ui/card';
+import { Badge } from '~/components/ui/badge';
 
 export const YarnCard = ({
   yarn,
@@ -9,22 +17,24 @@ export const YarnCard = ({
   colors: Camelize<Tables<'yarn_colors'>>[];
 }) => {
   return (
-    <article>
-      <h3>{yarn.name}</h3>
-      <span>{yarn.thickness}mm</span>
-      {colors.map(({ color, name, id }) => (
-        <div key={id}>
-          <div
-            style={{
-              background: color,
-              borderRadius: '50px',
-              width: '16px',
-              height: '16px',
-            }}
-          />
-          <span>{name}</span>
-        </div>
-      ))}
-    </article>
+    <Card>
+      <CardHeader>
+        <CardTitle>{yarn.name}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <span>{yarn.thickness}mm</span>
+      </CardContent>
+      <CardFooter>
+        {colors.map(({ color, name, id }) => (
+          <Badge key={id} className={'gap-2'}>
+            <div
+              className={'rounded-full w-3 h-3 bg-local'}
+              style={{ background: color }}
+            />
+            <span>{name}</span>
+          </Badge>
+        ))}
+      </CardFooter>
+    </Card>
   );
 };
