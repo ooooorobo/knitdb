@@ -1,15 +1,17 @@
 import { useSearchParams } from '@remix-run/react';
-import { ChangeEvent } from 'react';
 import {
   itemTypeList,
   itemTypeScheme,
   ItemTypeToName,
 } from 'src/constants/enum/itemType';
+import { Tabs, TabsList, TabsTrigger } from 'app/components/ui/tabs';
+import { useSelectedItemType } from 'src/components/item/useSelectedItemType';
 
 export const SelectItemType = () => {
+  const type = useSelectedItemType();
   const [, setSearchParams] = useSearchParams();
-  const handleSelectType = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { success, data } = itemTypeScheme.safeParse(e.target.value);
+  const handleSelectType = (type: string) => {
+    const { success, data } = itemTypeScheme.safeParse(type);
     if (!success) return;
 
     setSearchParams(
@@ -22,12 +24,16 @@ export const SelectItemType = () => {
   };
 
   return (
-    <select name="type" onChange={handleSelectType}>
-      {itemTypeList.map((t) => (
-        <option key={t} value={t}>
-          {ItemTypeToName[t].kr}
-        </option>
-      ))}
-    </select>
+    <>
+      <Tabs className="w-[400px]" value={type} onValueChange={handleSelectType}>
+        <TabsList className="grid w-full grid-cols-2">
+          {itemTypeList.map((t) => (
+            <TabsTrigger key={t} value={t}>
+              {ItemTypeToName[t].kr}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+    </>
   );
 };

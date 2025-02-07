@@ -10,14 +10,12 @@ import { LinksFunction, LoaderFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import './global.css';
 import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from '~/components/ui/menubar';
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '~/components/ui/navigation-menu';
 
 export const links: LinksFunction = () => [
   {
@@ -49,27 +47,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className={'min-h-svh bg-background text-foreground'}>
-        <Menubar>
-          <MenubarMenu>
-            <MenubarTrigger>File</MenubarTrigger>
-            <MenubarContent>
-              <MenubarItem>
-                New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem>New Window</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Share</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Print</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
-        <header>
-          <Link to={'/'}>뜨개디비</Link>
-          <Link to={'/item/new'}>추가</Link>
-          <Link to={'/logout'}>로그아웃</Link>
-        </header>
+      <body
+        className={'bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-100'}
+      >
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link to={'/'}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  뜨개디비
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+          <NavigationMenuList>
+            <Link to={'/item/new'}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                추가
+              </NavigationMenuLink>
+            </Link>
+            <Link to={'/logout'}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                로그아웃
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuList>
+        </NavigationMenu>
         <div className={'mx-auto w-full max-w-screen-lg'}>{children}</div>
         <ScrollRestoration />
         <Scripts />
