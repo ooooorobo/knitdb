@@ -5,14 +5,10 @@ import { NeedleCard } from 'src/components/list/needle/NeedleCard';
 import camelize, { Camelize } from 'camelize-ts';
 import { Tables } from 'src/types/dto';
 import { Link } from '@remix-run/react';
-import { useState } from 'react';
-import {
-  ItemType,
-  itemTypeList,
-  ItemTypeToName,
-} from 'src/constants/enum/itemType';
 import { match } from 'ts-pattern';
 import { YarnCard } from 'src/components/list/yarn/YarnCard';
+import { SelectItemType } from 'src/components/item/SelectItemType';
+import { useSelectedItemType } from 'src/components/item/useSelectedItemType';
 
 export const meta: MetaFunction = () => {
   return [{ title: '뜨개디비' }, { name: 'description', content: '' }];
@@ -38,17 +34,12 @@ export default function Index() {
       yarnColors: Camelize<Tables<'yarn_colors'>>[];
     })[];
   };
-  const [type, setType] = useState<ItemType>('yarn');
+
+  const type = useSelectedItemType();
 
   return (
     <>
-      <select name="type" onChange={(e) => setType(e.target.value as ItemType)}>
-        {itemTypeList.map((t) => (
-          <option key={t} value={t}>
-            {ItemTypeToName[t].kr}
-          </option>
-        ))}
-      </select>
+      <SelectItemType />
       {match(type)
         .with('needle', () => (
           <div>

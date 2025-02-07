@@ -1,6 +1,10 @@
-export const itemTypeList = ['yarn', 'needle'] as const;
+import { z } from 'zod';
 
-export type ItemType = (typeof itemTypeList)[number];
+export const itemTypeScheme = z.enum(['yarn', 'needle']);
+
+export const itemTypeList = itemTypeScheme.options;
+
+export type ItemType = z.infer<typeof itemTypeScheme>;
 
 export const ItemTypeToName: Record<ItemType, { kr: string }> = {
   yarn: {
