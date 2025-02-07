@@ -8,9 +8,16 @@ import {
 } from '@remix-run/react';
 import { LinksFunction, LoaderFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
+import './global.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: 'https://matcha.mizu.sh/matcha.css' },
+  {
+    rel: 'stylesheet',
+    crossOrigin: 'anonymous',
+    as: 'style',
+    href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css',
+  },
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {
