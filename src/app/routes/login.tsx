@@ -2,6 +2,7 @@ import { ActionFunction, LoaderFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
+import { LoginForm } from '~/components/login-form';
 
 const loginFormScheme = zfd.formData({
   email: zfd.text(z.string().email()),
@@ -47,10 +48,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function LoginPage() {
   return (
-    <form method={'post'}>
-      <input type="email" placeholder={'이메일'} name={'email'} />
-      <input type="password" placeholder={'비밀번호'} name={'password'} />
-      <button>로그인</button>
-    </form>
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <LoginForm />
+      </div>
+    </div>
   );
 }

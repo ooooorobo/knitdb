@@ -46,7 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Link to={'/item/new'}>추가</Link>
           <Link to={'/logout'}>로그아웃</Link>
         </header>
-        {children}
+        <div className={'mx-auto w-full max-w-screen-lg'}>{children}</div>
         <ScrollRestoration />
         <Scripts />
       </body>

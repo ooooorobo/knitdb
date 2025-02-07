@@ -12,6 +12,7 @@
     "generate:supabase": "supabase gen types typescript --project-id fdwddpetmvkrnheocnfq > src/types/dto.ts"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@remix-run/node": "^2.15.3",
     "@remix-run/react": "^2.15.3",
