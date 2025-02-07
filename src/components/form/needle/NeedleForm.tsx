@@ -5,7 +5,7 @@ import {
 
 export const NeedleForm = () => {
   return (
-    <form method={'post'}>
+    <form action={'/item/needle/new'} method={'post'}>
       <label>
         이름
         <input type="text" name={'name'} required />

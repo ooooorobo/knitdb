@@ -1,22 +1,27 @@
-import { ActionFunction, redirect } from '@remix-run/node';
-import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import { NeedleForm } from 'src/components/form/needle/NeedleForm';
-import { insertNeedleData } from 'src/domains/needle/NeedleRepository.server';
+import { useState } from 'react';
+import { match } from 'ts-pattern';
 
-export const action: ActionFunction = async ({ request }) => {
-  const { client, headers } = createSupabaseClient(request);
+const itemTypeList = ['yarn', 'needle'] as const;
 
-  const data = await insertNeedleData(client, await request.formData());
-
-  if (!data) {
-    throw new Response('실패', { headers });
-  }
-
-  return redirect(`/needle/${data.id}`, {
-    headers,
-  });
-};
+type ItemType = (typeof itemTypeList)[number];
 
 export default function ItemCreatePage() {
-  return <NeedleForm />;
+  const [type, setType] = useState<ItemType>('yarn');
+
+  return (
+    <>
+      <select name="type" onChange={(e) => setType(e.target.value as ItemType)}>
+        {itemTypeList.map((t) => (
+          <option key={t} value={t}>
+            {t}
+          </option>
+        ))}
+      </select>
+      {match<ItemType>(type)
+        .with('needle', () => <NeedleForm />)
+        .with('yarn', () => <></>)
+        .exhaustive()}
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 import { LoaderFunction } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
-import { useLoaderData } from 'react-router';
+import { json, useLoaderData } from 'react-router';
 import camelize, { Camelize } from 'camelize-ts';
 import { Tables } from 'src/types/dto';
 import { NeedleDetail } from 'src/components/detail/needle/NeedleDetail';
@@ -23,7 +23,7 @@ export const loader = (async ({ request, params }) => {
     throw new Response('', { status: 404, headers });
   }
 
-  return new Response(JSON.stringify(camelize(data)), { headers });
+  return json(camelize(data), { headers });
 }) satisfies LoaderFunction;
 
 export function ErrorBoundary() {
