@@ -2,9 +2,10 @@ import { ActionFunction, redirect } from '@remix-run/node';
 import { createSupabaseClient } from 'src/libs/supabase/createClient.server';
 import { insertNeedleData } from 'src/domains/needle/NeedleRepository.server';
 import { insertYarnData } from 'src/domains/yarn/YarnRepository.server';
+import { ItemType } from 'src/constants/enum/itemType';
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const type = params.type as 'yarn' | 'needle';
+  const type = params.type as ItemType;
   const { client, headers } = createSupabaseClient(request);
 
   switch (type) {

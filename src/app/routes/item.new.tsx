@@ -2,10 +2,11 @@ import { NeedleForm } from 'src/components/form/needle/NeedleForm';
 import { useState } from 'react';
 import { match } from 'ts-pattern';
 import { YarnForm } from 'src/components/form/yarn/YarnForm';
-
-const itemTypeList = ['yarn', 'needle'] as const;
-
-type ItemType = (typeof itemTypeList)[number];
+import {
+  ItemType,
+  itemTypeList,
+  ItemTypeToName,
+} from 'src/constants/enum/itemType';
 
 export default function ItemCreatePage() {
   const [type, setType] = useState<ItemType>('yarn');
@@ -15,7 +16,7 @@ export default function ItemCreatePage() {
       <select name="type" onChange={(e) => setType(e.target.value as ItemType)}>
         {itemTypeList.map((t) => (
           <option key={t} value={t}>
-            {t}
+            {ItemTypeToName[t].kr}
           </option>
         ))}
       </select>
