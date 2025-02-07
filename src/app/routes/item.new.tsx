@@ -1,6 +1,7 @@
 import { NeedleForm } from 'src/components/form/needle/NeedleForm';
 import { useState } from 'react';
 import { match } from 'ts-pattern';
+import { YarnForm } from 'src/components/form/yarn/YarnForm';
 
 const itemTypeList = ['yarn', 'needle'] as const;
 
@@ -20,7 +21,7 @@ export default function ItemCreatePage() {
       </select>
       {match<ItemType>(type)
         .with('needle', () => <NeedleForm />)
-        .with('yarn', () => <></>)
+        .with('yarn', () => <YarnForm />)
         .exhaustive()}
     </>
   );

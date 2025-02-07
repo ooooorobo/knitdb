@@ -19,7 +19,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
     case 'yarn': {
-      console.log(request.formData());
+      console.log(await request.formData());
       return {};
     }
   }
